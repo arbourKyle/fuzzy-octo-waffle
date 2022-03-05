@@ -2,9 +2,9 @@ const mysql = require('mysql2');
 const table = ('console.table');
 const connection = require('../server')
 
-let viewAllDep = function viewAllDep() {
+let viewAllRole = function viewAllRole() {
 	connection.execute(
-	  'SELECT * FROM departments',
+	  'SELECT * FROM roles',
 	  
 	  function(err, results, fields) {
 		console.table(results);
@@ -12,5 +12,5 @@ let viewAllDep = function viewAllDep() {
 
   }
 
-  module.exports = viewAllDep;
+  module.exports = viewAllRole;
 //   module.exports.viewAllDep = viewAllDep

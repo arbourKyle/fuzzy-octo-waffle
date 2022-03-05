@@ -1,20 +1,19 @@
 const mysql = require('mysql2');
 const table = ('console.table');
+
 const viewAllDep = require('./scripts/viewAllDeps');
-require('dotenv').config();
+const viewAllRole = require('./scripts/viewRoles');
+const viewAllEmp = require('./scripts/viewAllEmp');
+const addDep = require('./scripts/addDep');
+
 
 const inquirer = require('inquirer');
 
 
-const connection = mysql.createConnection({
-	host: 'localhost',
-	user: 'root',
-	password: process.env.DB_PASSWORD,
-	database: 'employeetracker_db'
-  });
 
 
-function main() {
+
+const main = function main() {
 inquirer
   .prompt([
     {
@@ -33,24 +32,29 @@ inquirer
 	}
   ])
   .then((answers) => {
-	switch(answers.choices) {
-	case'view all departments':
-		viewAllDep();
-		break;
-	default:
-		exit();
-		break
-	  }
+	let x = answers.choices;
+	if (x == 'view all departments'){
+		viewAllDep();		
+	}
+	else if (x == 'view all roles') {
+		viewAllRole();
+	}
+	else if (x == 'view all employees') {
+		viewAllEmp();
+	}
+	else if (x == 'add a department') {
+		addDep();
+	}
+
   })
   .catch((error) => {
     if (error.isTtyError) {
       // Prompt couldn't be rendered in the current environment
     } else {
-      // Something else went wrong
+      console.table('Yippeee');
     }
   });
 }
 
 
 main();
-module.exports = connection;
