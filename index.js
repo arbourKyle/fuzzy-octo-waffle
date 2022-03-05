@@ -5,6 +5,8 @@ const viewAllDep = require('./scripts/viewAllDeps');
 const viewAllRole = require('./scripts/viewRoles');
 const viewAllEmp = require('./scripts/viewAllEmp');
 const addDep = require('./scripts/addDep');
+const addRole = require('./scripts/addRole');
+const addEmp = require('./scripts/addEmp');
 
 
 const inquirer = require('inquirer');
@@ -13,7 +15,7 @@ const inquirer = require('inquirer');
 
 
 
-const main = function main() {
+function main() {
 inquirer
   .prompt([
     {
@@ -45,6 +47,16 @@ inquirer
 	else if (x == 'add a department') {
 		addDep();
 	}
+	else if (x == 'add a role') {
+		addRole();
+	}
+	else if (x == 'add an employee') {
+		addEmp();
+	}
+	else {
+		updateEmpRole();
+	}
+
 
   })
   .catch((error) => {
@@ -58,3 +70,4 @@ inquirer
 
 
 main();
+module.exports = main;
