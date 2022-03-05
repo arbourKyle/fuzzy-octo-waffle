@@ -1,9 +1,20 @@
-const sql = require('mysql2');
+const mysql = require('mysql2');
 const table = ('console.table');
+const viewAllDep = require('./scripts/viewAllDeps');
 require('dotenv').config();
-// const connection = require('./scripts/viewAllDeps.js');
+
 const inquirer = require('inquirer');
 
+
+const connection = mysql.createConnection({
+	host: 'localhost',
+	user: 'root',
+	password: process.env.DB_PASSWORD,
+	database: 'employeetracker_db'
+  });
+
+
+function main() {
 inquirer
   .prompt([
     {
@@ -22,20 +33,13 @@ inquirer
 	}
   ])
   .then((answers) => {
-	  
-    switch(fruits) {
-		
-		case "view all departments":
+	switch(answers.choices) {
+	case'view all departments':
 		viewAllDep();
 		break;
-		case "Orange":
-		text = "I am not a fan of orange.";
-		break;
-		case "Apple":
-		text = "How you like them apples?";
-		break;
-		default:
-		text = "I have never heard of that fruit...";
+	default:
+		exit();
+		break
 	  }
   })
   .catch((error) => {
@@ -45,25 +49,8 @@ inquirer
       // Something else went wrong
     }
   });
-
-
-  const connection = mysql.createConnection({
-	host: 'localhost',
-	user: 'root',
-	password: process.env.DB_PASSWORD,
-	database: 'employeetracker_db'
-  });
-
-function viewAllDep() {
-  connection.execute(
-	'SELECT * FROM departments',
-	
-	function(err, results, fields) {
-	  console.table(results); // results contains rows returned by server
-	  // fields contains extra meta data about results, if available
-  
-	  // If you execute same statement again, it will be picked from a LRU cache
-	  // which will save query preparation time and give better performance
-	}
-  );
 }
+
+
+main();
+module.exports = connection;
