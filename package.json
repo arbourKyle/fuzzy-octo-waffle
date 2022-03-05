@@ -1,5 +1,5 @@
 {
-  "name": "improved-rotary-phone",
+  "name": "fuzzy-octo-waffle",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,18 +8,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/arbourKyle/improved-rotary-phone.git"
+    "url": "git+https://github.com/arbourKyle/fuzzy-octo-waffle.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/arbourKyle/improved-rotary-phone/issues"
+    "url": "https://github.com/arbourKyle/fuzzy-octo-waffle/issues"
   },
-  "homepage": "https://github.com/arbourKyle/improved-rotary-phone#readme",
+  "homepage": "https://github.com/arbourKyle/fuzzy-octo-waffle#readme",
   "dependencies": {
     "console.table": "^0.10.0",
     "inquirer": "^8.2.0",
-    "mysql": "^2.18.1"
+    "sql": "^0.78.0"
   }
 }
