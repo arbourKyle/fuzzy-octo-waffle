@@ -33,15 +33,37 @@ inquirer
 		}
 	])
 	.then((answer) => {
+		var role;
+		var manager;
+		if(answer.roleName == 'Salesperson'){
+			role = 2;
+			manager = 1; 
+		}
+		else if(answer.roleName == 'Software Engineer'){
+			role = 4;
+			manager = 3;
+		}
+		else if(answer.roleName == 'Accountant'){
+			role = 6;
+			manager = 5;
+		}
+		else {
+			role = 8;
+			manager = 7
+		}
 
-		let first_name = 
-		
-		console.log(answer);
 		connection.query(
-			'INSERT INTO employees `first_name, last_name, role_id, manager_id` VALUES `answer.firstName, answer.firstName, answer.roleName`',
+			'INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ("'+answer.firstName+'","'+ answer.lastName+'","'+role+'","'+manager+'")',
 			
-			function(err, results, empName) {
-				console.table(answer);
+			function(err, results) {
+				console.table([
+					{
+					first_name: answer.firstName,
+					last_name: answer.lastName,
+					role_id: role,
+					manager_id: manager
+					}
+				]);
 			});
 		});
 }
