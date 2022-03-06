@@ -7,7 +7,7 @@ const inquirer = require('inquirer');
 var depLength;
 
 
-let addRole = function askRole(depLength){
+let addRole = function askRole(){
 inquirer
 	.prompt([
 		{
@@ -26,10 +26,10 @@ inquirer
 			message: 'What is the department for the role?'
 		},
 	])
-	.then((answer) => {
+	.then((answer, depLength) => {
 		
 		connection.execute('SELECT * FROM departments',(err, results, fields) =>{depLength = results.length});
-		console.log('depLength', depLength)
+		console.log('depLength->', depLength)
 			
 		let title = answer.roleName;
 		let salary = answer.salary;
