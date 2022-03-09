@@ -7,11 +7,10 @@ let viewAllEmp = function viewAllEmployees() {
 	  'SELECT * FROM employees',
 	  
 	  function(err, results, fields) {
-		console.log('\n', '\n');
+		
 		console.table(results);
 		console.table('Press arrow key for more options');
-		console.log('\n', '\n', '\n', '\n');
-		console.log('\n', '\n', '\n', '\n');
+		console.log('\n');
 	  });
 
   }

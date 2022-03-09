@@ -40,31 +40,38 @@ inquirer
 	let x = answers.choices;
 	if (x == 'view all departments'){
 		viewAllDep();
+		exitReturn();
 		return
 	}
 	else if (x == 'view all roles') {
 		viewAllRole();
+		exitReturn();
 		return
 	}
 	else if (x == 'view all employees') {
 		viewAllEmp();
+		exitReturn();
 		return
 	}
 	else if (x == 'add a department') {
 		addDep();
+		exitReturn();
 		return
 	}
 	else if (x == 'add a role') {
 		
 		addRole();
+		exitReturn();
 		return
 	}
 	else if (x == 'add an employee') {
 		addEmp();
+		exitReturn();
 		return
 	}
 	else if (x == 'update an employee role') {
 		updateEmpRole();
+		exitReturn();
 		return
 	}
 	else {
@@ -84,7 +91,27 @@ inquirer
 });
 }
 
+function exitMain() {
+	
+	return new Promise(resolve => {
+	  setTimeout(() => {
+		// connection.end();
+		main();
+		resolve();
 
-let exit =()=> connection.end();
+	  }, 20);
+	});
+  }
+  
+  async function exitReturn() {
+	
+	const result = await exitMain();
+	console.log(result);
+	// expected output: "resolved"
+  }
+  
+
+  
+
 main();
 module.exports = main;

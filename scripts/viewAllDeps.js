@@ -10,12 +10,11 @@ let viewAllDep = function viewAllDep() {
 		
 		function(err, results, fields) {
 			
-			console.log('\n', '\n');
 			console.table(results);
-			console.log(results.length);
 			console.table('Press arrow key for more options');
-			console.log('\n', '\n', '\n', '\n');
-	  });
+			console.table('\n');
+			
+		});
 
   }
   

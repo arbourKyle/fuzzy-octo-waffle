@@ -4,7 +4,7 @@ const connection = require('../server');
 
 const inquirer = require('inquirer');
 
-var depLength;
+global.depLength;
 
 
 let addRole = function askRole(){
@@ -26,21 +26,22 @@ inquirer
 			message: 'What is the department for the role?'
 		},
 	])
-	.then((answer, depLength) => {
+	.then((answer) => {
 		
-		connection.execute('SELECT * FROM departments',(err, results, fields) =>{depLength = results.length});
-		console.log('depLength->', depLength)
+		connection.execute('SELECT * FROM departments',(err, results, fields) =>{depLength = results.length;
+			console.log('1-->', depLength);
 			
 		let title = answer.roleName;
 		let salary = answer.salary;
 		let dep = answer.department;
 		if(answer.department != 'Salesperson' || 'Software Engineer' || 'Accountant' || 'Lawyer') {
-			
+			depLength++;
+			console.log('2-->', depLength);
 		}
 
 		connection.execute(
 			
-			'INSERT INTO roles (title, salary, department_id) VALUES ("'+title+'","'+salary+'","'+depLength+'")',
+			'INSERT INTO roles (title, salary) VALUES ("'+title+'","'+salary+'")',
 			// 'INSERT INTO departments (name) VALUES ("'+dep+'")',
 			
 			function(err, results) {
@@ -48,5 +49,6 @@ inquirer
 				console.log(err);
 			});
 		});
+	});
 }
   module.exports = addRole;
