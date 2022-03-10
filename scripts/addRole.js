@@ -2,12 +2,15 @@ const mysql = require('mysql2');
 const table = ('console.table');
 const connection = require('../server');
 
+
+
 const inquirer = require('inquirer');
 
 global.depLength;
 
+//pass main function to to askrole
 
-let addRole = function askRole(){
+let addRole = function askRole(main){
 inquirer
 	.prompt([
 		{
@@ -45,10 +48,17 @@ inquirer
 			// 'INSERT INTO departments (name) VALUES ("'+dep+'")',
 			
 			function(err, results) {
+
+				console.log('\n');
+				console.log('\n');
 				console.table(results);
 				console.log(err);
+				
+				console.log('\n');
+				console.log('\n');
 			});
 		});
+		main();
 	});
 }
   module.exports = addRole;

@@ -8,9 +8,9 @@ let viewAllEmp = function viewAllEmployees() {
 	  
 	  function(err, results, fields) {
 		
+		console.log('\n');
 		console.table(results);
 		console.table('Press arrow key for more options');
-		console.log('\n');
 	  });
 
   }

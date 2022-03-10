@@ -39,43 +39,59 @@ inquirer
   .then((answers) => {
 	let x = answers.choices;
 	if (x == 'view all departments'){
-		viewAllDep();
-		exitReturn();
+		viewAllDep(main);
+		
 		return
 	}
 	else if (x == 'view all roles') {
 		viewAllRole();
-		exitReturn();
+		setTimeout(() => {
+			main()
+		  }, 1100);
+		
 		return
 	}
 	else if (x == 'view all employees') {
 		viewAllEmp();
-		exitReturn();
+		setTimeout(() => {
+			main()
+		  }, 1200);
+		
 		return
 	}
 	else if (x == 'add a department') {
 		addDep();
-		exitReturn();
+		setTimeout(() => {
+			main()
+		  }, 1300);
+		
 		return
 	}
 	else if (x == 'add a role') {
 		
-		addRole();
-		exitReturn();
+		addRole(main);
+		
+		
 		return
 	}
 	else if (x == 'add an employee') {
 		addEmp();
-		exitReturn();
+		setTimeout(() => {
+			main()
+		  }, 1450);
+		
 		return
 	}
 	else if (x == 'update an employee role') {
 		updateEmpRole();
-		exitReturn();
+		setTimeout(() => {
+			main()
+		  }, 1451);
+		
 		return
 	}
 	else {
-		exit();
+		connection.end();
 		return
 	}
 
@@ -90,7 +106,7 @@ inquirer
     }
 });
 }
-
+/* 
 function exitMain() {
 	
 	return new Promise(resolve => {
@@ -99,18 +115,18 @@ function exitMain() {
 		main();
 		resolve();
 
-	  }, 20);
+	  }, 200);
 	});
   }
   
   async function exitReturn() {
 	
 	const result = await exitMain();
-	console.log(result);
+	
 	// expected output: "resolved"
   }
   
-
+ */
   
 
 main();
