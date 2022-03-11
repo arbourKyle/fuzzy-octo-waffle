@@ -10,7 +10,7 @@ global.depLength;
 
 //pass main function to to askrole
 
-let addRole = function askRole(main){
+const addRole = (main)=>{
 inquirer
 	.prompt([
 		{
@@ -58,7 +58,7 @@ inquirer
 				console.log('\n');
 			});
 		});
-		main();
+		main()
 	});
 }
   module.exports = addRole;

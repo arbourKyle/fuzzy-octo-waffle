@@ -7,7 +7,7 @@ const inquirer = require('inquirer');
 var empName;
 
 
-let addEmp = function askEmp(){
+const addEmp = ()=>{
 inquirer
 	.prompt([
 		{

@@ -2,7 +2,7 @@ const mysql = require('mysql2');
 const table = ('console.table');
 const connection = require('../server')
 
-let viewAllEmp = function viewAllEmployees() {
+const viewAllEmp = () => {
 	connection.execute(
 	  'SELECT * FROM employees',
 	  

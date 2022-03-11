@@ -8,7 +8,7 @@ var depName;
 
 
 
-let addDep = function askDep(){
+const addDep = ()=>{
 	
 inquirer
 	.prompt([

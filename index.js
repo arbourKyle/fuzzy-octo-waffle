@@ -1,22 +1,10 @@
 const mysql = require('mysql2');
 const table = ('console.table');
-
-const viewAllDep = require('./scripts/viewAllDeps');
-const viewAllRole = require('./scripts/viewRoles');
-const viewAllEmp = require('./scripts/viewAllEmp');
-const addDep = require('./scripts/addDep');
-const addRole = require('./scripts/addRole');
-const addEmp = require('./scripts/addEmp');
-// var depLength = require('./scripts/viewAllDeps');
-
-const inquirer = require('inquirer');
 const connection = require('./server');
+const inquirer = require('inquirer');
 
 
-
-
-
-function main() {
+/* function main() {
 inquirer
   .prompt([
     {
@@ -35,67 +23,35 @@ inquirer
 				'exit'
 		]
 	}
-  ])
-  .then((answers) => {
-	let x = answers.choices;
-	if (x == 'view all departments'){
-		viewAllDep(main);
-		
-		return
-	}
-	else if (x == 'view all roles') {
-		viewAllRole();
-		setTimeout(() => {
-			main()
-		  }, 1100);
-		
-		return
-	}
-	else if (x == 'view all employees') {
-		viewAllEmp();
-		setTimeout(() => {
-			main()
-		  }, 1200);
-		
-		return
-	}
-	else if (x == 'add a department') {
-		addDep();
-		setTimeout(() => {
-			main()
-		  }, 1300);
-		
-		return
-	}
-	else if (x == 'add a role') {
-		
-		addRole(main);
-		
-		
-		return
-	}
-	else if (x == 'add an employee') {
-		addEmp();
-		setTimeout(() => {
-			main()
-		  }, 1450);
-		
-		return
-	}
-	else if (x == 'update an employee role') {
-		updateEmpRole();
-		setTimeout(() => {
-			main()
-		  }, 1451);
-		
-		return
-	}
-	else {
-		connection.end();
-		return
+  ]) */
+  /* .then((answers) => {
+	switch(answers.choices) {
+		case 'view all departments':
+			department();
+			break;
+		case 'view all roles':
+			viewAllRole();
+			break;
+		case 'view all employees':
+			viewAllEmp();
+			break;
+		case 'add a department':
+			addDep()
+			return
+		case 'add a role':
+			addRole();
+			return
+		case 'add an employee':
+			addEmp();
+			return
+		case 'update an employee role':
+			updateEmpRole();
+			return
+		default:
+			connection.end();
 	}
 
-	
+
 })
 .catch((error) => {
 	if (error.isTtyError) {
@@ -104,30 +60,4 @@ inquirer
     } else {
 		console.log(error);
     }
-});
-}
-/* 
-function exitMain() {
-	
-	return new Promise(resolve => {
-	  setTimeout(() => {
-		// connection.end();
-		main();
-		resolve();
-
-	  }, 200);
-	});
-  }
-  
-  async function exitReturn() {
-	
-	const result = await exitMain();
-	
-	// expected output: "resolved"
-  }
-  
- */
-  
-
-main();
-module.exports = main;
+}); */
