@@ -1,7 +1,9 @@
+const figlet = require('figlet');
 const mysql = require('mysql2');
 const table = ('console.table');
 const inquirer = require('inquirer');
 
+const connection = require('./server');
 
 /* const viewAllDep = require('./questions');
 const viewAllRole = require('./questions');
@@ -12,8 +14,16 @@ const addEmp = require('./questions');
 const updateEmpRole = require('./questions'); */
 
 
-const connection = require('./server');
+console.log(figlet.textSync('Employee \n Manager', {
+    font: 'Crawford2',
+    horizontalLayout: 'default',
+    verticalLayout: 'default',
+    width: 80,
+    whitespaceBreak: true
 
+}));
+                                                 
+                                                 
 //MAIN PROMPT
 function main() {
 	inquirer
@@ -158,6 +168,9 @@ const addRole = () => {
 				message: 'What is the department for the role?'
 			},
 		])
+
+		//return this.conncetion.promise().query("INSERT INTO name SET ?", name);
+
 		.then((answer) => {
 					
 			connection.execute('SELECT * FROM departments',(err, results, fields) =>{depLength = results.length;
@@ -171,19 +184,19 @@ const addRole = () => {
 	
 			connection.execute(
 				
-				'INSERT INTO roles (title, salary) VALUES ("'+title+'","'+salary+'")',
+				'INSERT INTO departments (name) VALUES ("'+dep+'")',
 				
-				(err, results) => {console.table(results);
+				(err, results) => {console.table('added "'+dep+'" to roles table');
 					
 					// main()
 			});
 			connection.execute(
+				//HOW DO I ADD DEPLENGTH TO DEPARTMENT_ID ????????????????????????????????????????????????????????
+				'INSERT INTO roles (title, salary, department_id) VALUES ("'+title+'","'+salary+'","'+depLength+'")',
 				
-				'INSERT INTO departments (name) VALUES ("'+dep+'")',
-				
-				(err, results) => {console.table(results);
+				(err, results) => {console.table('added "'+title+'","'+salary+'" to roles table');
 					
-					// main()
+					main()
 			});
 			
 		});			
@@ -246,20 +259,54 @@ const addEmp = ()=>{
 						last_name: answer.lastName,
 						role_id: role,
 						manager_id: manager
-						}
-						
+					}
+					
 				]);
-			main()
+				main()
+			});
 		});
-	});
-};
-
-//UPDATE ROLE
-const updateEmpRole = () => {
-connection.execute(
-	'INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (Fred, Zed, 2, 1)',
+	};
 	
-	function(err, results, empName) {
-		console.log(results)
-});
+	//UPDATE ROLE
+	const updateEmpRole = () => {
+		
+		first = [];
+		last = [];
+		connection.execute('SELECT first_name, last_name FROM employees', (err, results) => {
+			results.forEach(element => {
+				
+				first = element.first_name;
+				last = element.last_name;
+			});
+			
+			
+			connection.execute('SELECT title FROM roles', (err, results) => {let roles = results;
+				console.log('inEach',first);
+				console.log('inEach',last);
+				
+				inquirer.prompt([
+					{
+						type: 'list',
+						name: 'roleName',
+						message: 'Which employee\'s role do you want to update?',
+						choices: [[`${first}`][`${last}`]]
+					},
+					{
+						type: 'list',
+						name: 'roleName',
+						message: 'What is the employee\'s role?',
+						choices: [roles]
+					},
+				])
+				
+				connection.execute(
+					
+					'INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (Fred, Zed, 2, 1)',
+					
+					function(err, results) {
+						console.log('insert emp',results)
+			});//END OF INSERT INTO EMPLOYEES
+		});//END OF SELECT NAME FROM EMPLOYEES
+	});//END OF SELECT TITLE FROM ROLES
 }
+		
