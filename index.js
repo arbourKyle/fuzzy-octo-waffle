@@ -295,9 +295,9 @@ const updateEmpRole = () => {
 		if (fullName[fullName.length] !== fullName[fullName.length - 1]) {
 		}
 
-		console.log('full',fullName)
-		console.log('first', first)
-		console.log('last', last)
+		// console.log('full',fullName)
+		// console.log('first', first)
+		// console.log('last', last)
 		// console.log(fullName[fullName.length-1])
 		// results.forEach(element => {
 		// 	let name = element.first_name+" "+element.last_name;
@@ -305,8 +305,8 @@ const updateEmpRole = () => {
 		// console.log('names', fullName.length)
 
 		connection.execute('SELECT title FROM roles', (err, results) => {
-			
-			console.log(results[0].title)
+			var roles = results;
+			// console.log(results)
 			
 			inquirer.prompt([
 				{
@@ -338,8 +338,12 @@ const updateEmpRole = () => {
 				let split = answers.empName;
 				let firstName =split.split(0, ' '); let lastName =split.split(' ', -1)
 				// console.log(lastName[0])
-
 				
+				var role_id;
+				var manager_id;
+				var roles = results;
+				console.log(answers.roleName)
+				console.log(results)
 				if(answers.roleName == 'Sales Lead') {
 					role_id = 1;
 					manager_id = null;
@@ -378,13 +382,15 @@ const updateEmpRole = () => {
 				}
 				
 				
-
-			connection.execute(
-				 
-				 'INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (lastName[0], lastName[1], role_id, manager_id)',
-
-				function (err, results) {
-					// console.log(err)
+				
+				var empFirstName = lastName[0];
+				var empLastName = lastName[1];
+				console.log(lastName[1])	
+				connection.execute(
+					
+					`INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (${empFirstName}, ${empLastName}, ${role_id}, ${manager_id})`,
+					function (err, results) {
+						console.log(err)
 				
 				})//END OF THEN
 				//}); //END OF FOREACH
