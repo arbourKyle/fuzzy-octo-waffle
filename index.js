@@ -235,6 +235,7 @@ const addEmp = () => {
 		.then((answer) => {
 			var role;
 			var manager;
+			var roleName = answer.roleName;
 			if (answer.roleName == 'Salesperson') {
 				role = 2;
 				manager = 1;
@@ -256,15 +257,16 @@ const addEmp = () => {
 				'INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ("' + answer.firstName + '","' + answer.lastName + '","' + role + '","' + manager + '")',
 
 				function (err, results) {
-					console.table([
-						{
-							first_name: answer.firstName,
-							last_name: answer.lastName,
-							role_id: role,
-							manager_id: manager
-						}
+					console.table("Added " + answer.firstName + " " + answer.lastName + " to " + `${roleName}` + ".")
+					// console.table([
+					// 	{
+					// 		first_name: answer.firstName,
+					// 		last_name: answer.lastName,
+					// 		role_id: role,
+					// 		manager_id: manager
+					// 	}
 
-					]);
+					// ]);
 					main()
 				});
 		});
@@ -285,11 +287,13 @@ const updateEmpRole = () => {
 
 			first.push(value.first_name);
 			last.push(value.last_name);
-			
+
 			fullName.push(value.first_name + " " + value.last_name)
 			// console.log('', fullName)
-			lastName.push(fullName[fullName.length - 1])
-			// console.log('last',last)
+			// lastName.push(fullName[fullName.length - 1])
+			// console.log('last', fullName)
+
+
 
 		}
 		if (fullName[fullName.length] !== fullName[fullName.length - 1]) {
@@ -302,101 +306,118 @@ const updateEmpRole = () => {
 		// results.forEach(element => {
 		// 	let name = element.first_name+" "+element.last_name;
 
-		// console.log('names', fullName.length)
+		console.log('names', first[10])
 
 		connection.execute('SELECT title FROM roles', (err, results) => {
 			var roles = results;
 			// console.log(results)
-			
+
 			inquirer.prompt([
 				{
+					loop: false,
 					type: 'list',
 					name: 'empName',
 					message: 'Which employee\'s role do you want to update?',
 					choices: [
-						{ name: fullName[0], value: first[0]+' '+last[0] },
-						{ name: fullName[1], value: first[1]+' '+last[1] },
-						{ name: fullName[2], value: fullName[2] },
+						{ name: fullName[0], value: first[0] + ' ' + last[0] },
+						{ name: fullName[1], value: first[1] + ' ' + last[1] },
+						{ name: fullName[2], value: first[2] + ' ' + last[2] },
+						{ name: fullName[3], value: first[3] + ' ' + last[3] },
+						{ name: fullName[4], value: first[4] + ' ' + last[4] },
+						{ name: fullName[5], value: first[5] + ' ' + last[5] },
+						{ name: fullName[6], value: first[6] + ' ' + last[6] },
+						{ name: fullName[7], value: first[7] + ' ' + last[7] },
+						{ name: fullName[8], value: first[8] + ' ' + last[8] },
+						{ name: fullName[9], value: first[9] + ' ' + last[9] },
+						{ name: fullName[10], value: first[10] + ' ' + last[10] },
+						//I DONT KNOW HOW TO POPULATE THIS DYNAMICALLY SO SOME NAMES ADDED BEFORE WILL BE MISSING
 						{ name: fullName[fullName.length - 1], value: fullName[fullName.length - 1] },
 					]
 
 				},
 				{
+					loop: false,
 					type: 'list',
 					name: 'roleName',
 					message: 'What is the employee\'s role?',
 					choices: [
-							{ name: results[0].title, value: results[0].title },
-							{ name: results[1].title, value: results[1].title },
-							{ name: results[2].title, value: results[2].title },
-							{ name: results[3].title, value: results[3].title },
-				]
+						{ name: results[0].title, value: results[0].title },
+						{ name: results[1].title, value: results[1].title },
+						{ name: results[2].title, value: results[2].title },
+						{ name: results[3].title, value: results[3].title },
+						{ name: results[4].title, value: results[4].title },
+						{ name: results[5].title, value: results[5].title },
+						{ name: results[6].title, value: results[6].title },
+						{ name: results[7].title, value: results[7].title },
+						//I DONT KNOW HOW TO POPULATE THIS DYNAMICALLY SO SOME ROLES ADDED BEFORE WILL BE MISSING
+						{ name: results[results.length - 1].title, value: results[results.length - 1].title },
+					]
 				},
 			])
-			.then((answers) => {
-				let spacer = ' ';
-				let split = answers.empName;
-				let firstName =split.split(0, ' '); let lastName =split.split(' ', -1)
-				// console.log(lastName[0])
-				
-				var role_id;
-				var manager_id;
-				var roles = results;
-				console.log(answers.roleName)
-				console.log(results)
-				if(answers.roleName == 'Sales Lead') {
-					role_id = 1;
-					manager_id = null;
-				}
-				else if(answers.roleName == 'Salesperson') {
-					role_id = 2;
-					manager_id = 1;
-				}
-				else if(answers.roleName == 'Lead Engineer') {
-					role_id = 3;
-					manager_id = null;
-				}
-				else if(answers.roleName == 'Software Engineer') {
-					role_id = 4;
-					manager_id = 3;
-				}
-				else if(answers.roleName == 'Accountant Manager') {
-					role_id = 5;
-					manager_id = null;
-				}
-				else if(answers.roleName == 'Accountant') {
-					role_id = 6;
-					manager_id = 5;
-				}
-				else if(answers.roleName == 'Legal Team Lead') {
-					role_id = 7;
-					manager_id = null;
-				}
-				else if(answers.roleName == 'Lawyer') {
-					role_id = 8;
-					manager_id = 7;
-				}
-				else{
-					role_id = roles.length++;
-					manager_id = null;
-				}
-				
-				
-				
-				var empFirstName = lastName[0];
-				var empLastName = lastName[1];
-				console.log(lastName[1])	
-				connection.execute(
+				.then((answers) => {
+					let spacer = ' ';
+					let split = answers.empName;
+					let firstName = split.split(0, ' '); let lastName = split.split(' ', -1)
+					// console.log(lastName[0])
 					
-					`INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (${empFirstName}, ${empLastName}, ${role_id}, ${manager_id})`,
-					function (err, results) {
-						console.log(err)
-				
-				})//END OF THEN
+					var empFirstName = lastName[0];
+					var empLastName = lastName[1];
+					// console.log(lastName[1])	
+					
+					var role_id;
+					var manager_id;
+					var roles = answers.roleName;
+					// console.log(results)
+
+					if (answers.roleName == 'Sales Lead') {
+						role_id = 1;
+						manager_id = null;
+					}
+					else if (answers.roleName == 'Salesperson') {
+						role_id = 2;
+						manager_id = 1;
+					}
+					else if (answers.roleName == 'Lead Engineer') {
+						role_id = 3;
+						manager_id = null;
+					}
+					else if (answers.roleName == 'Software Engineer') {
+						role_id = 4;
+						manager_id = 3;
+					}
+					else if (answers.roleName == 'Accountant Manager') {
+						role_id = 5;
+						manager_id = null;
+					}
+					else if (answers.roleName == 'Accountant') {
+						role_id = 6;
+						manager_id = 5;
+					}
+					else if (answers.roleName == 'Legal Team Lead') {
+						role_id = 7;
+						manager_id = null;
+					}
+					else if (answers.roleName == 'Lawyer') {
+						role_id = 8;
+						manager_id = 7;
+					}
+					else {
+						role_id = roles.length++;
+						manager_id = null;
+					}
+
+
+
+					connection.execute(
+
+						`INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ('${empFirstName}', '${empLastName}', '${role_id}', '${manager_id}')`,
+						function (err, results) {
+							console.table(`Updated ${empFirstName} ${empLastName} to the role of ${answers.roleName}`)
+							main();
+
+					})//END OF DOT THEN
 				//}); //END OF FOREACH
-			
 			});//END OF INSERT INTO EMPLOYEES
-		
 		});//END OF SELECT NAME FROM EMPLOYEES
 	});//END OF SELECT TITLE FROM ROLES
 }//END OF UPDATE EMPLOYEE FUNC
