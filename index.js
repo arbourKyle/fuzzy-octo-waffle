@@ -306,7 +306,7 @@ const updateEmpRole = () => {
 		// results.forEach(element => {
 		// 	let name = element.first_name+" "+element.last_name;
 
-		console.log('names', first[10])
+		// console.log('names', first[10])
 
 		connection.execute('SELECT title FROM roles', (err, results) => {
 			var roles = results;
@@ -362,7 +362,7 @@ const updateEmpRole = () => {
 					
 					var empFirstName = lastName[0];
 					var empLastName = lastName[1];
-					// console.log(lastName[1])	
+					console.log('wtf',empFirstName, empLastName)	
 					
 					var role_id;
 					var manager_id;
@@ -412,6 +412,7 @@ const updateEmpRole = () => {
 
 						`INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ('${empFirstName}', '${empLastName}', '${role_id}', '${manager_id}')`,
 						function (err, results) {
+							console.log(err)
 							console.table(`Updated ${empFirstName} ${empLastName} to the role of ${answers.roleName}`)
 							main();
 
