@@ -10,9 +10,7 @@
 
 [License](#license)
 
-[Contributing](#contributing)
-
-[Tests](#tests)
+[Walkthrough](#walkthrough)
 
 [Questions](#questions)
 
@@ -28,11 +26,9 @@ Clone this repository with a terminal on your computer, open the main folder wit
 ## Usage
 Follow the prompts
 
-## Contributing
+## Walkthrough
 
-
-## Tests
-
+https://youtu.be/F0wg8rTNbP0
 
 ## Questions
 https://github.com/arbourkyle 
